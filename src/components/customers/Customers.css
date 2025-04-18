@@ -4,9 +4,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 3rem;
-  }
+}
 
-  .customers > * {
+.customers > * {
     flex-basis: 31%;
     margin: 0.5rem;
-  }
+}
