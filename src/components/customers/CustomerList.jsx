@@ -13,10 +13,10 @@ export const CustomerList = () => {
     }, [])
 
     return (
-    <div className="customers">
-        {customers.map((customerObj) => {
-        return <User user={customerObj} /> 
-        })}
-    </div>
+        <div className="customers">
+            {customers.map((customerObj) => {
+                return <User user={customerObj} />
+            })}
+        </div>
     )
 }
