@@ -7,10 +7,15 @@ import { Routes, Route, Outlet } from "react-router-dom"
 import { Welcome } from "./components/welcome/Welcome.jsx"
 import { CustomerDetails } from "./components/customers/CustomerDetails.jsx"
 import { EmployeeDetails } from "./components/employees/EmployeeDetails.jsx"
+import { Login } from "./components/auth/Login"
+import { Register } from "./components/auth/Register"
 
 export const App = () => {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
       <Route path="/" element={
         <>
           <NavBar />
