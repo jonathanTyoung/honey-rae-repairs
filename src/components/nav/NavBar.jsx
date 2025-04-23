@@ -4,6 +4,9 @@ import "./NavBar.css"
 export const NavBar = () => {
     return <ul className="navbar">
         <li className="navbar-item">
+            <Link to="/">Home</Link>
+        </li>
+        <li className="navbar-item">
             <Link to="/tickets">Tickets</Link>
         </li>
         <li className="navbar-item">

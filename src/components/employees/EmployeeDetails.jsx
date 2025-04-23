@@ -7,11 +7,19 @@ export const EmployeeDetails = () => {
     const { employeeId } = useParams() // { employeeId: 3}
 
     useEffect(() => {
-        getEmployeeByUserId((employeeId).then((data) => {
+        getEmployeeByUserId(employeeId).then((data) => {
             const employeeObj = data[0]
             setEmployee(employeeObj)
-        }))
+        })
     }, [employeeId])
+
+    // Function to format rate as USD
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        }).format(amount)
+    }
 
     return (
         <section className="employee">
@@ -21,12 +29,12 @@ export const EmployeeDetails = () => {
                 {employee.user?.email}
             </div>
             <div>
-                <span className="employee-info">Address : </span>
-                {employee.address}
+                <span className="employee-info">Specialty : </span>
+                {employee.specialty}
             </div>
             <div>
-                <span className="employee-info">Phone Number : </span>
-                {employee.phoneNumber}
+                <span className="employee-info">Rate : </span>
+                {formatCurrency(employee.rate)} {/* formats this number to USD */}
             </div>
         </section>
         )
