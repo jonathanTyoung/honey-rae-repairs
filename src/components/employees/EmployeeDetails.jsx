@@ -35,7 +35,11 @@ export const EmployeeDetails = () => {
             <div>
                 <span className="employee-info">Rate : </span>
                 {formatCurrency(employee.rate)} {/* formats this number to USD */}
+            <div>
+                <span className="employee-info">Tickets Assigned : </span>
+                {employee.employeeTickets?.length} {/* Display the ticket count */}
+            </div>
             </div>
         </section>
-        )
+    )
 }

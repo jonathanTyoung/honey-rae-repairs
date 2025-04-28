@@ -1,10 +1,13 @@
-import { getEmployeeByUserId } from "../../services/EmployeeService.jsx"
+import { getEmployeeByUserId, updateEmployee } from "../../services/EmployeeService.jsx"
 import "./Form.css"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 export const EmployeeForm = ({ currentUser }) => {
     const [employee, setEmployee] = useState({})
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getEmployeeByUserId(currentUser.id).then((data) => {
@@ -12,6 +15,23 @@ export const EmployeeForm = ({ currentUser }) => {
             setEmployee(employeeObj)
         })
     }, [currentUser])
+
+    const handleSave = (event) => {
+        event.preventDefault()
+        console.log("clicked")
+
+        const editedEmployee = {
+            id: employee.id,
+            specialty: employee.specialty,
+            rate: employee.rate,
+            userId: employee.userId
+
+        }
+
+        updateEmployee(editedEmployee).then(() => {
+            navigate(`/employees/${currentUser.id}`)
+        })
+    }
 
 
     return (
@@ -36,13 +56,18 @@ export const EmployeeForm = ({ currentUser }) => {
                     <label>Hourly Rate:</label>
                     <input type="number"
                         value={employee?.rate}
+                        onChange={(event) => {
+                            const copy = { ...employee}
+                            copy.rate = event.target.value
+                            setEmployee(copy)
+                        }}
                         required
                         className="form-control" />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <button className="form-btn btn-primary">
+                    <button className="form-btn btn-primary" onClick={handleSave}>
                         Save Profile
                     </button>
                 </div>
