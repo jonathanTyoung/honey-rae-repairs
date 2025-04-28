@@ -10,10 +10,19 @@ export const TicketList = ({ currentUser }) => {
   const [filteredTickets, setFilteredTickets] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
 
+  const getAndSetTickets = () => {
+    getAllTickets().then((ticketsArray) => {
+      setAllTickets(ticketsArray)
+    })
+  }
+
+  useEffect (() => {
+    getAndSetTickets
+  }, [])
+
   useEffect(() => {
     getAllTickets().then(ticketsArray => {
       setAllTickets(ticketsArray)
-      console.log("tickets set!")
     })
   }, []) // ONLY runs on the initial render of the component 
 
@@ -43,7 +52,10 @@ export const TicketList = ({ currentUser }) => {
         {filteredTickets.map((ticketObj) => {
           return (
             <Ticket
-              ticket={ticketObj} currentUser={currentUser} key={ticketObj.id} />
+              ticket={ticketObj} 
+              currentUser={currentUser} 
+              getAndSetTickets={getAndSetTickets}
+              key={ticketObj.id} />
           )
         })}
       </article>
