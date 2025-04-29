@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllEmployees } from "../../services/EmployeeService.jsx"
-import { assignTicket, updateTicket } from "../../services/TicketService.jsx"
+import { assignTicket, updateTicket, deleteTicket } from "../../services/TicketService.jsx"
 // import { getEmployeeById } from "../../services/TicketService.jsx"
 
 export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
@@ -22,7 +22,7 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
 
     const handleClaim = () => {
         const currentEmployee = employees.find(employee => employee.userId === currentUser.id)
-        
+
         const newEmployeeTicket = {
             employeeId: currentEmployee.id,
             serviceTicketId: ticket.id
@@ -42,6 +42,11 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
             dateCompleted: new Date()
         }
         updateTicket(closeTicket).then(() => {
+            getAndSetTickets()
+        })
+    }
+    const handleDelete = () => {
+        deleteTicket(ticket.id).then(() => {
             getAndSetTickets()
         })
     }
@@ -67,7 +72,7 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
                     {currentUser.isStaff && !assignedEmployee ? (
                         <button className="btn btn-secondary" onClick={handleClaim}>
                             Claim
-                            </button>
+                        </button>
                     ) : (
                         ""
                     )}
@@ -76,9 +81,12 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
                     {assignedEmployee?.userId === currentUser.id && !ticket.dateCompleted ? (
                         <button className="btn btn-warning" onClick={handleClose}>
                             Close
-                            </button>
+                        </button>
                     ) : (
                         ""
+                    )}
+                    {/*if the user is a customer and there is no date completed then they can have the option to delete their ticket*/}
+                    {!currentUser?.isStaff && (<button className="btn btn-warning" onClick={handleDelete}>Delete</button>
                     )}
                 </div>
             </footer>
