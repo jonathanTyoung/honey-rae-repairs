@@ -18,13 +18,13 @@ export const TicketList = ({ currentUser }) => {
 
   useEffect (() => {
     getAndSetTickets
-  }, [])
-
-  useEffect(() => {
-    getAllTickets().then(ticketsArray => {
-      setAllTickets(ticketsArray)
-    })
   }, []) // ONLY runs on the initial render of the component 
+
+  // useEffect(() => {
+  //   getAllTickets().then(ticketsArray => {
+  //     setAllTickets(ticketsArray)
+  //   })
+  // }, []) // ONLY runs on the initial render of the component 
 
   useEffect(() => {
     if (showEmergencyOnly) {

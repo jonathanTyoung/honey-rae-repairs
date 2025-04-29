@@ -33,7 +33,6 @@ export const EmployeeForm = ({ currentUser }) => {
         })
     }
 
-
     return (
         <form className="profile">
             <h2>Update Profile</h2>

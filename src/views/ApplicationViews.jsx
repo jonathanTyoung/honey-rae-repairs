@@ -12,5 +12,9 @@ export const ApplicationViews = () => {
     setCurrentUser(honeyUserObject)
   }, [])
 
-  return currentUser.isStaff ? <EmployeeViews currentUser={currentUser} /> : <CustomerViews />
+  return currentUser.isStaff ? (
+  <EmployeeViews currentUser={currentUser} /> 
+) : ( 
+  <CustomerViews currentUser={currentUser} />
+)
 }
