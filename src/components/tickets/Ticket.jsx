@@ -7,14 +7,6 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
     const [employees, setEmployees] = useState([])
     const [assignedEmployee, setAssignedEmployee] = useState({})
 
-    // useEffect(() => {
-    //     if (ticket.employeeTickets.length) {
-    //         getEmployeeById(ticket.employeeTickets[0].employeeId).then((employee) => {
-    //             setAssignedEmployee(employee)
-    //         })
-    //     }
-    // }, [ticket])
-
     useEffect(() => {
         getAllEmployees().then((employeesArray) => {
             setEmployees(employeesArray)
